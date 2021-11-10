@@ -21,7 +21,8 @@ public class WorkFacade {
         this.groupManager = groupManager;
     }
 
-    public List<Work> SelfWork(Userable user) {
+    public List<Work> SelfWork(LoginList loginList, String username) {
+        Userable user = loginList.getUser(username);
         Employee employee = null;
         ArrayList<Work> ListOfWork = null;
         for (Employee e: this.employeeList){
@@ -32,8 +33,8 @@ public class WorkFacade {
         for (Workable w: this.workList){
             for (Group g: this.groupList){
                 boolean s = false;
-                for (Userable u: g.getMembers()){
-                    if (u.equals(user)){
+                for (Userable each_user: g.getMembers()){
+                    if (each_user.equals(user)){
                         s = true;
                         break;
                     }
